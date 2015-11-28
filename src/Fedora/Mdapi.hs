@@ -19,14 +19,20 @@ import Fedora.Mdapi.Internal
 import Fedora.Mdapi.Types
 import Network.Wreq
 
-pkg :: Branch -> String -> MdapiT (Response BL.ByteString)
-pkg branch package =
-  mdapiGet $ "/" ++ branchToBranchName branch ++ "/pkg/" ++ package
+pkg :: Branch -> String -> MdapiT (Either String PackageResponse)
+pkg branch package = do
+  rawResp <- mdapiGet $ "/" ++ branchToBranchName branch ++ "/pkg/" ++ package
+  return $ eitherDecode (rawResp ^. responseBody)
 
-files :: Branch -> String -> MdapiT (Response BL.ByteString)
-files branch package =
-  mdapiGet $ "/" ++ branchToBranchName branch ++ "/files/" ++ package
+files :: Branch -> String -> MdapiT (Either String FilesResponse)
+files branch package = do
+  rawResp <- mdapiGet $ "/" ++ branchToBranchName branch ++ "/files/" ++ package
+  return $ eitherDecode (rawResp ^. responseBody)
 
-changelog :: Branch -> String -> MdapiT (Response BL.ByteString)
-changelog branch package =
-  mdapiGet $ "/" ++ branchToBranchName branch ++ "/changelog/" ++ package
+changelog :: Branch -> String -> MdapiT (Either String ChangelogResponse)
+changelog branch package = do
+  rawResp <- mdapiGet $
+             "/" ++ branchToBranchName branch ++ "/changelog/" ++ package
+  -- https://pagure.io/mdapi/issue/23
+  --resp <- asJSON =<< rawResp
+  return $ eitherDecode (rawResp ^. responseBody)
