@@ -1,7 +1,8 @@
 name:                mdapi
 version:             1
 synopsis:            Haskell interface to Fedora's mdapi
--- description:
+description:         Provides access to the
+                     <http://apps.fedoraproject.org/mdapi/ Fedora mdapi> API.
 homepage:            https://github.com/relrod/mdapi-hs
 license:             BSD2
 license-file:        LICENSE
