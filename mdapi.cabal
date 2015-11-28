@@ -1,4 +1,4 @@
-name:                mdapi-hs
+name:                mdapi
 version:             1
 synopsis:            Haskell interface to Fedora's mdapi
 -- description:
