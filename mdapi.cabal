@@ -1,5 +1,5 @@
 name:                mdapi
-version:             1
+version:             2
 synopsis:            Haskell interface to Fedora's mdapi
 description:         Provides access to the
                      <http://apps.fedoraproject.org/mdapi/ Fedora mdapi> API.
@@ -15,19 +15,18 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Fedora.Mdapi.Internal
-                     , Fedora.Mdapi.Types
-                     , Fedora.Mdapi
-  -- other-modules:
-  -- other-extensions:
+  exposed-modules:     Fedora.Mdapi.Types
+                     , Fedora.Mdapi.Servant
   build-depends:       aeson >= 0.7 && < 1
                      , base >= 4 && < 5
-                     , bytestring >= 0.10 && < 1
-                     , data-default
+                     , bytestring >= 0.9 && < 1
+                     , http-client >= 0.4 && < 1
+                     , http-client-tls >= 0.3 && < 0.4
                      , lens >= 4 && < 5
                      , lens-aeson >= 1 && < 2
+                     , servant >= 0.7 && < 1
+                     , servant-client >= 0.7 && < 1
                      , text >= 1 && < 2
                      , transformers >= 0.3 && < 0.6
-                     , wreq >= 0.3 && < 0.5
   hs-source-dirs:      src
   default-language:    Haskell2010
