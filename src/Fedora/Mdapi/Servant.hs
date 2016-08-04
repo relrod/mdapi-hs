@@ -20,6 +20,7 @@ type MdapiApi =
   :<|> Capture "branch" T.Text  :> "pkg" :> Capture "package" T.Text :> Get '[JSON] PackageResponse
   :<|> Capture "branch" T.Text  :> "files" :> Capture "package" T.Text :> Get '[JSON] FilesResponse
   :<|> Capture "branch" T.Text  :> "changelog" :> Capture "package" T.Text :> Get '[JSON] ChangelogResponse
+  :<|> Capture "branch" T.Text  :> "provides" :> Capture "package" T.Text :> Get '[JSON] PackageResponse
 
 api :: Proxy MdapiApi
 api = Proxy
@@ -28,4 +29,5 @@ branches :: Manager -> BaseUrl -> ExceptT ServantError IO [T.Text]
 pkg :: T.Text -> T.Text -> Manager -> BaseUrl -> ExceptT ServantError IO PackageResponse
 files :: T.Text -> T.Text -> Manager -> BaseUrl -> ExceptT ServantError IO FilesResponse
 changelog :: T.Text -> T.Text -> Manager -> BaseUrl -> ExceptT ServantError IO ChangelogResponse
-branches :<|> pkg :<|> files :<|> changelog  = client api
+provides :: T.Text -> T.Text -> Manager -> BaseUrl -> ExceptT ServantError IO PackageResponse
+branches :<|> pkg :<|> files :<|> changelog :<|> provides = client api
